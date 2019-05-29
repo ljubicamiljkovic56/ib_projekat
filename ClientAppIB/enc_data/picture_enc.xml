@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><picture><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:KeyName>Kriptovani tajni kljuc</ds:KeyName>
-<xenc:EncryptedKey xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>j/+NaxZRjBB0v8y93rQUAQL7fywDRqw4KM0dDItq8mDj2TpI2xenPrmbDyvWdmbrJpCg7mz/e1gG
-t6Ov77TApS1VBshXkS2no4e3BONUDVjsKyd3tdNgAuZr1vlRsfA7BEKEtFTg73a3Ja9bVOkHsYzk
-ulbG9LRbfUkFTVxyRBRE+lBlu+5z8+fhGXAvZxO0br8tSM8Sr7fkYu0+N01HIh0S+H63Am7vNjUh
-AR6Z2prG9MRO3tUC7QhXLgsXM6fCZKDePQW39fA9Oz99JoBmhsjwh9/sid4zieV/S4j8rQYudey/
-JsChdDhheN89OlZ4ejSbMQqFPse8tnfEOv5cog==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>/JxfkP5+yrI/D8I2uumwHtda3MWPgZl69gg+3HN8Wq5dD7fmeHVgP2nYMo9fGovb7/mdCg0Xo9dc
-gewRHDkGGtZRAyOwdTxYa5FYlUNNHXPIJzjTrj1DtvdOyBgEHRQpkwZonnWDcxuDcG7jXTzQ89lD
-kH/DMHlpOPuzLQ3xMI7nj33tNhRUdqAhwWpjHmwDwfGWLyYhM/Q=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></picture>
+<xenc:EncryptedKey xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>IFszbK/PK2mNeiR0BXXCeEyvHAK2yB5/nOljxEcb2eBvmbwXsWXnDQxXkZ6U3o09dNZcN84N+p8x
+7BYPK6n/2kQVf31RMqeSdl2cQKQvdLqfdvt9ZXRrN+wX70uaUNaHu1z5m6ueIlRiUhzsCZyFX4en
+AEdyeiShkSJVzd97ltm7b7wSE7O8XNPrwvFeF2bOl6zANyKiou4OwOQyHx0tnESb9Mcx+r+DhDeM
+dPWCHc4AgEaIAVWZDfOrRUWPBz//cso4sYFimlMlu0c3FVvaBCMTGlswVrhoFkCLFzdqzHJ0A0U/
+se8MefuT8eGd5qs0MiPxMFktGCdxXoIyu/T3rA==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>bHOFT2K+2krwOkXJ4QXsfLfUUpO7aTyaDHGymmGo9yrazAaK9/c+CMtX5MeehfVKC8+HfL5z/8SQ
+c6LEMV9bN7c7lK8iBrMogae+FEcKF1vai9IwbbeSAi9BRFkY9z+hnVzPdG5VhNPD/1PwZgOiCHTI
+9WgJAADw8STMlThBmbZL8lZthEt9tgUZedox32bR2I0lL/V7QHY=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></picture>

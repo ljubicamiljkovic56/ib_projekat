@@ -3,10 +3,12 @@ package ib.project.rest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +43,7 @@ public class DemoController {
 		DATA_DIR_PATH = rb.getString("dataDir");
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ResponseEntity<String> createAFileInResources() throws IOException {
 		byte[] content = "Content".getBytes();
 
@@ -51,14 +54,35 @@ public class DemoController {
 		Files.write(path, content);
 		System.out.println("Upload slike");
 		return new ResponseEntity<String>(path.toString(), HttpStatus.OK);
+	}*/
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes
+			redirectAttributes) {
+		Path uploadLocation = Paths.get("uploads");
+		try {
+			Files.createDirectories(uploadLocation);
+		}catch(IOException ex) {
+			throw new RuntimeException("Coud not initialize storage", ex);
+		}
+		
+		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+		
+		try {
+			if(file.isEmpty()) {
+				throw new RuntimeException("Failed to store empty file " + filename);
+			}
+			
+			InputStream inputStream = file.getInputStream();
+			Files.copy(inputStream, uploadLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+			System.out.println("Pokrecemo upload");
+		} catch(IOException e) {
+			throw new RuntimeException("Failed to store file " + filename, e);
+		}
+		
+		return "{result: 'true'}";
 	}
 	
-	@RequestMapping(value = "/files/upload", method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-	//	storageService.store(file);
-		redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-		return "redirect:/";
-	}
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> download() {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
