@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -15,11 +16,16 @@ public class PictureUpload {
 	    File file = new File(filename);
 	    String boundary = Long.toHexString(System.currentTimeMillis());
 
-	    URLConnection connection = new URL(url).openConnection();
+	    URL url1 = new URL("http://localhost:8080/upload");
+	    HttpURLConnection connection = (HttpURLConnection)url1.openConnection();
 	    connection.setDoOutput(true);
-	   // connection.setRequestMethod("POST");
+	    //connection.setRequestMethod("POST");
 	    connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+	   
+	    
 
+
+	    
 	    try {
 	        OutputStream output = connection.getOutputStream();
 	        DataOutputStream  writer = new DataOutputStream(output);
@@ -35,10 +41,14 @@ public class PictureUpload {
 	        writer.writeBytes("\r\n");
 	        writer.writeBytes("--" + boundary + "--\r\n");
 	        writer.flush();
+	        int statusCode = connection.getResponseCode();
+	        System.out.println("status code" + statusCode);
 	    } catch (Exception ex){
 	        System.out.println("Ex: " + ex.getMessage());
+	        System.out.println("Upload.....");
 	        ex.printStackTrace();
 	    }
 	}
 	
+
 }
