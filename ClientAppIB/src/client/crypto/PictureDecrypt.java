@@ -45,23 +45,19 @@ public class PictureDecrypt {
 	
 	
     static {
-    	//staticka inicijalizacija
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
     }
     
 	public void testIt() {
-		//ucitava se dokument
+		
 		Document doc = loadDocument(IN_FILE);
 		
-		//ucitava se privatni kljuc
 		PrivateKey pk = readPrivateKey();
 		
-		//kriptuje se dokument
 		System.out.println("Decrypting....");
 		doc = decrypt(doc, pk);
 		
-		//snima se dokument
 		saveDocument(doc, OUT_FILE);
 		System.out.println("Encryption done");
 	}
@@ -89,9 +85,7 @@ public class PictureDecrypt {
 		}
 	}
 	
-	/**
-	 * Snima DOM u XML fajl 
-	 */
+
 	private void saveDocument(Document doc, String fileName) {
 		try {
 			File outFile = new File(fileName);
@@ -124,16 +118,13 @@ public class PictureDecrypt {
 		}
 	}
 	
-	/**
-	 * Ucitava privatni kljuc is KS fajla
-	 * alias primer
-	 */
+
 	private PrivateKey readPrivateKey() {
 		try {
-			//kreiramo instancu KeyStore
+			
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 			
-			//ucitavamo podatke
+			
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
 			ks.load(in, "primer".toCharArray());
 			
@@ -168,27 +159,23 @@ public class PictureDecrypt {
 		} 
 	}
 	
-	/**
-	 * Kriptuje sadrzaj prvog elementa odsek
-	 */
+
 	private Document decrypt(Document doc, PrivateKey privateKey) {
 		
 		try {
-			//cipher za dekritpovanje XML-a
+			
 			XMLCipher xmlCipher = XMLCipher.getInstance();
 			
-			//inicijalizacija za dekriptovanje
+			
 			xmlCipher.init(XMLCipher.DECRYPT_MODE, null);
 			
-			//postavlja se kljuc za dekriptovanje tajnog kljuca
+			
 			xmlCipher.setKEK(privateKey);
 			
-			//trazi se prvi EncryptedData element
+		
 			NodeList encDataList = doc.getElementsByTagNameNS("http://www.w3.org/2001/04/xmlenc#", "EncryptedData");
 			Element encData = (Element) encDataList.item(0);
 			
-			//dekriptuje se
-			//pri cemu se prvo dekriptuje tajni kljuc, pa onda njime podaci
 			xmlCipher.doFinal(doc, encData); 
 			
 			return doc;

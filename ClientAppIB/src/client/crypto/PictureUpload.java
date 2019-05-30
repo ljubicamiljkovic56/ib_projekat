@@ -23,9 +23,6 @@ public class PictureUpload {
 	    connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 	   
 	    
-
-
-	    
 	    try {
 	        OutputStream output = connection.getOutputStream();
 	        DataOutputStream  writer = new DataOutputStream(output);

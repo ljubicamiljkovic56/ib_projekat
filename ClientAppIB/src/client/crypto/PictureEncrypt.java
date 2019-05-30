@@ -58,37 +58,26 @@ public class PictureEncrypt {
 	private static final String KEY_STORE_FILE = "./data/slika.jks";
 
 	static {
-		// staticka inicijalizacija
 		Security.addProvider(new BouncyCastleProvider());
 		org.apache.xml.security.Init.init();
 	}
 
 	public void testIt() {
-		// ucitava se dokument
 		Document doc = loadDocument(IN_FILE);
 		
-		// generise tajni session kljuc
 		System.out.println("Generating secret key ....");
 		SecretKey secretKey = generateDataEncryptionKey();
 		
-		// ucitava sertifikat za kriptovanje tajnog kljuca
 		Certificate cert = readCertificate();
 		
-		// kriptuje se dokument
 		System.out.println("Encrypting....");
 		doc = encrypt(doc, secretKey, cert);
 		
-		// snima se tajni kljuc
-		// snima se dokument
 		saveDocument(doc, OUT_FILE);
 		
 		System.out.println("Encryption done");
 	}
 	
-
-	/**
-	 * Kreira DOM od XML dokumenta
-	 */
 	private Document loadDocument(String file) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -112,14 +101,9 @@ public class PictureEncrypt {
 		}
 	}
 
-	/**
-	 * Ucitava sertifikat is KS fajla alias primer
-	 */
 	private Certificate readCertificate() {
 		try {
-			// kreiramo instancu KeyStore
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
-			// ucitavamo podatke
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
 			ks.load(in, "slika".toCharArray());
 
@@ -150,9 +134,7 @@ public class PictureEncrypt {
 		}
 	}
 
-	/**
-	 * Snima DOM u XML fajl
-	 */
+
 	private void saveDocument(Document doc, String fileName) {
 		try {
 			File outFile = new File(fileName);
@@ -185,14 +167,12 @@ public class PictureEncrypt {
 		}
 	}
 
-	/**
-	 * Generise tajni kljuc
-	 */
+
 	private SecretKey generateDataEncryptionKey() {
 
 		try {
-			KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede"); // Triple
-																			// DES
+			KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede"); 
+																			
 			return keyGenerator.generateKey();
 
 		} catch (NoSuchAlgorithmException e) {
@@ -201,51 +181,40 @@ public class PictureEncrypt {
 		}
 	}
 
-	/**
-	 * Kriptuje sadrzaj prvog elementa odsek
-	 */
+
 	private Document encrypt(Document doc, SecretKey key, Certificate certificate) {
 
 		try {
 
-			// cipher za kriptovanje XML-a
 			XMLCipher xmlCipher = XMLCipher.getInstance(XMLCipher.TRIPLEDES);
 			
-			// inicijalizacija za kriptovanje
+			
 			xmlCipher.init(XMLCipher.ENCRYPT_MODE, key);
 
-			// cipher za kriptovanje tajnog kljuca,
-			// Koristi se Javni RSA kljuc za kriptovanje
+			
 			XMLCipher keyCipher = XMLCipher.getInstance(XMLCipher.RSA_v1dot5);
 			
-			// inicijalizacija za kriptovanje tajnog kljuca javnim RSA kljucem
+			
 			keyCipher.init(XMLCipher.WRAP_MODE, certificate.getPublicKey());
 			
-			// kreiranje EncryptedKey objekta koji sadrzi  enkriptovan tajni (session) kljuc
 			EncryptedKey encryptedKey = keyCipher.encryptKey(doc, key);
 			
-			// u EncryptedData element koji se kriptuje kao KeyInfo stavljamo
-			// kriptovan tajni kljuc
-			// ovaj element je koreni elemnt XML enkripcije
+		
 			EncryptedData encryptedData = xmlCipher.getEncryptedData();
 			
-			// kreira se KeyInfo element
+			
 			KeyInfo keyInfo = new KeyInfo(doc);
 			
-			// postavljamo naziv 
 			keyInfo.addKeyName("Kriptovani tajni kljuc");
 			
-			// postavljamo kriptovani kljuc
 			keyInfo.add(encryptedKey);
 			
-			// postavljamo KeyInfo za element koji se kriptuje
 			encryptedData.setKeyInfo(keyInfo);
 
-			// trazi se element ciji sadrzaj se kriptuje
 			NodeList pictures = doc.getElementsByTagName("picture");
 			Element picture = (Element) pictures.item(0);
 
-			xmlCipher.doFinal(doc, picture, true); // kriptuje sa sadrzaj
+			xmlCipher.doFinal(doc, picture, true);
 
 			return doc;
 
