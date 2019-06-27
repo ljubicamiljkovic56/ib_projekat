@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><picture><korisnickoIme/><podaciOSlici hash="5e72f1aa7337e9f606d26eada6d2fa01" naziv=".\data\slike\cherry blossoms.jpg" velicina="4500"/><datumKreiranja datum="2019/06/27 20:34:05"/><korisnickoIme/><podaciOSlici hash="927dcc3886cf73b282f62ee7aa14d192" naziv=".\data\slike\cool-diamond.jpg" velicina="10619"/><datumKreiranja datum="2019/06/27 20:34:05"/><korisnickoIme/><podaciOSlici hash="b35f667fa98c68d1d0348eac6f334280" naziv=".\data\slike\floral.jpg" velicina="20671"/><datumKreiranja datum="2019/06/27 20:34:05"/><korisnickoIme/><podaciOSlici hash="bac6703964a188d715360c2918633b6f" naziv=".\data\slike\kokkari beach.jpg" velicina="6750"/><datumKreiranja datum="2019/06/27 20:34:05"/><korisnickoIme/><podaciOSlici hash="8880661bd247d0fe035e8dd0f1c10482" naziv=".\data\slike\oasis.jpg" velicina="18192"/><datumKreiranja datum="2019/06/27 20:34:05"/><korisnickoIme/><podaciOSlici hash="13931911927e6d532c4cb011cdb5d3db" naziv=".\data\slike\Springtime.jpg" velicina="24300"/><datumKreiranja datum="2019/06/27 20:34:05"/><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>HQFzzPd233sa5BLHGgN2P8+L9kc=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+LPemuJy+fe8dQ69Ldeullhb2Tb3Xlg4NbmjU2EmXKMw4ZWfmf/aWYgMwd7TNJH7YfHV+y7HPeISX
+fS3ZACgX7gYgkeQdPz5knRtrG86BFdmvg9AAvYeSo3cWcAZmaoyNsswr84lYbVkspqWwEnCFBseE
+d47JJCeyMjayaJWaKA5CyR5GyeH/75ub3u/EuIWwEzF6zE5m7oS5/jmdVkeaViFZoHzehdNYTMHK
+YLJi27ksyShfPo0Hyya9LupjpBaSz9kd0eV56EXtVbwx72DLN8BBzSsL+GbrWMnISWyhbfI3MFnp
+1Wtcv42/BhwpDHQGN8E+qva0/HTwu9GoRTtgow==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+l0vs9sb7MRUDpvvnWegDZHMrDlf+awFYEWdFGZxhfqn2v8joez6NU5wA0GGozAxxfsFQgD7KaW4/
+UrcoyN4eoqW6asvizEJkQInu9+vXZv9VKwa46mUxkugXpWkAbME0R9KG5YQNlEZo26KSjVUayZKP
+ED6xXyyc0WTEiEiVg86Drechd7w3SF8uXmVjs+j31yPOVJSk1yPqf6SynDY9ugnVHj9ZU9WJEyj0
+wjxiS84jab1a3ukhBhWP+JgJ1BsKWAQYEsrIY7ijTqh5+L8xZcAQFYFNf9FgDCCeJQOZBKkiLNq3
+8DpxYJTVA74ZS+7MeGJWlnEm2v6/H9p7Lj1a8Q==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIDczCCAlsCBFzq3xUwDQYJKoZIhvcNAQEFBQAwfjEeMBwGCSqGSIb3DQEJARYPc2xpa2FAdW5z
+LmFjLnJzMQswCQYDVQQGEwJSUzEPMA0GA1UECAwGU2VyYmlhMQ4wDAYDVQQHDAVzbGlrYTEOMAwG
+A1UECgwFc2xpa2ExDjAMBgNVBAsMBXNsaWthMQ4wDAYDVQQDDAVzbGlrYTAeFw0xOTA1MjYxODQ2
+NDVaFw0yMDA1MjUxODQ2NDVaMH4xHjAcBgkqhkiG9w0BCQEWD3NsaWthQHVucy5hYy5yczELMAkG
+A1UEBhMCUlMxDzANBgNVBAgMBlNlcmJpYTEOMAwGA1UEBwwFc2xpa2ExDjAMBgNVBAoMBXNsaWth
+MQ4wDAYDVQQLDAVzbGlrYTEOMAwGA1UEAwwFc2xpa2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
+ggEKAoIBAQCXS+z2xvsxFQOm++dZ6ANkcysOV/5rAVgRZ0UZnGF+qfa/yOh7Po1TnADQYajMDHF+
+wVCAPsppbj9StyjI3h6ipbpqy+LMQmRAie7369dm/1UrBrjqZTGS6BelaQBswTRH0oblhA2URmjb
+opKNVRrJko8QPrFfLJzRZMSISJWDzoOt5yF3vDdIXy5eZWOz6PfXI85UlKTXI+p/pLKcNj26CdUe
+P1lT1YkTKPTCPGJLziNpvVre6SEGFY/4mAnUGwpYBBgSyshjuKNOqHn4vzFlwBAVgU1/0WAMIJ4l
+A5kEqSIs2rfwOnFglNUDvhlL7sx4YlaWcSba/r8f2nsuPVrxAgMBAAEwDQYJKoZIhvcNAQEFBQAD
+ggEBAAulE1eOwuHa9qMhHRVvvoxRjkQ6q9+it/FrzPcezSpn/tkOPhJNZ02XEWZ0ibog+hKOnV+R
+TkFD33rk5XhwUEM8vICiTRcw87tVdaGCdYMhYQa7cU7j8i4MULkTvG3oRy10ScfxFks5dSE6jvmf
+NJmJ/yWHi3CoEnm3GTc2seKF6IB8W/v8d/hbmUrLUgWaiHiJ7tyWIq8LCmp2bbSw7XMcaGQArHuU
+ukeUa3YU/16OZGAXe3iWUJ3wPDPa7jw4kkBF8HuMnKEnqClDsuPkqfojm3sbXmghAkkhYIO6euZo
+PKwJQ7mmNmeENYK63oUTj9uDihVmOU7a0/0FoAnjLaQ=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></picture>
