@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
@@ -42,12 +43,16 @@ import org.apache.xml.security.encryption.EncryptedKey;
 import org.apache.xml.security.encryption.XMLCipher;
 import org.apache.xml.security.encryption.XMLEncryptionException;
 import org.apache.xml.security.keys.KeyInfo;
+import org.apache.xml.serialize.XHTMLSerializer;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import client.signed.CheckXMLSignEnveloped;
+import client.signed.XMLSignEnveloped;
+import client.util.HashAnImage;
 import client.util.ZipUtil;
 
 
@@ -227,11 +232,25 @@ public class PictureEncrypt {
 		}
 	}
 
-	public static void main(String[] args) throws MalformedURLException, IOException {
+	public static void main(String[] args) throws MalformedURLException, IOException, NoSuchAlgorithmException {
 		PictureEncrypt encrypt = new PictureEncrypt();
 		encrypt.testIt();
+
+		PictureXML pictureXML = new PictureXML();
+		
+		pictureXML.getPictureXMLFiles("./data/slike");
+		
+		XMLSignEnveloped xmlSign = new XMLSignEnveloped();
+		xmlSign.testIt();
+		
+		CheckXMLSignEnveloped checkXmlSign = new CheckXMLSignEnveloped();
+		checkXmlSign.testIt();
+		
 		ZipUtil.zipFile("./enc_data/picture_enc.xml");
 		PictureUpload.uploadFile("./zip/picture_enc.xml.zip", "http://localhost:8080/upload");
+		
+		
+		
 		
 	}
 

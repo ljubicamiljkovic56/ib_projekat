@@ -24,8 +24,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
-public class VerifySignedEnveloped {
-private static final String file2 = "nesto";
+public class CheckXMLSignEnveloped {
+	
+private static final String file2 = "./data/data_signed.xml";
 	
     static {
         Security.addProvider(new BouncyCastleProvider());
@@ -36,7 +37,7 @@ private static final String file2 = "nesto";
 		Document doc = loadDocument(file2);
 		
 		boolean res = verifySignature(doc);
-		System.out.println("Verification = " + res);
+		System.out.println("Provera = " + res);
 	}
 	
 	private Document loadDocument(String file) {
@@ -99,8 +100,8 @@ private static final String file2 = "nesto";
 		}
 	}
 	
-	public static void main(String[] args) {
-		VerifySignedEnveloped verify = new VerifySignedEnveloped();
-		verify.testIt();
-	}
+//	public static void main(String[] args) {
+//		CheckXMLSignEnveloped verify = new CheckXMLSignEnveloped();
+//		verify.testIt();
+//	}
 }

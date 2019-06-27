@@ -43,28 +43,28 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 
-public class SignEnveloped {
+public class XMLSignEnveloped {
 
-		private static String file = "nesto";
-		private static String file1 = "nesto1";
-		private static String kljuc = "kljuc";
+		private static String file1 = "./data/data.xml";
+		private static String file2 = "./data/data_signed.xml";
+		private static String kljuc = "./data/slika.jks";
 		
 		static {
 			  Security.addProvider(new BouncyCastleProvider());
 		      org.apache.xml.security.Init.init();
 		}
 		public void testIt() {
-			Document doc = loadDocument(file);
+			Document doc = loadDocument(file1);
 			
 			PrivateKey pk = readPrivateKey();
 			
 			Certificate cert = readCertificate();
 	
-			System.out.println("Signing....");
+			System.out.println("Potpisivanje xml-a....");
 			doc = signDocument(doc, pk, cert);
 			
-			saveDocument(doc, file1);
-			System.out.println("Signing of document done");
+			saveDocument(doc, file2);
+			System.out.println("Potpisivanje xml-a zavrseno");
 		}
 		private Document loadDocument(String file) {
 			try {
@@ -127,10 +127,10 @@ public class SignEnveloped {
 				KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 
 				BufferedInputStream in = new BufferedInputStream(new FileInputStream(kljuc));
-				ks.load(in, "primer".toCharArray());
+				ks.load(in, "slika".toCharArray());
 				
-				if(ks.isKeyEntry("primer")) {
-					Certificate cert = ks.getCertificate("primer");
+				if(ks.isKeyEntry("slika")) {
+					Certificate cert = ks.getCertificate("slika");
 					return cert;
 					
 				}
@@ -163,10 +163,10 @@ public class SignEnveloped {
 				KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 				
 				BufferedInputStream in = new BufferedInputStream(new FileInputStream(kljuc));
-				ks.load(in, "primer".toCharArray());
+				ks.load(in, "slika".toCharArray());
 				
-				if(ks.isKeyEntry("primer")) {
-					PrivateKey pk = (PrivateKey) ks.getKey("primer", "primer".toCharArray());
+				if(ks.isKeyEntry("slika")) {
+					PrivateKey pk = (PrivateKey) ks.getKey("slika", "slika".toCharArray());
 					return pk;
 				}
 				else
@@ -233,10 +233,10 @@ public class SignEnveloped {
 				return null;
 			}
 		}
-		
-		public static void main(String[] args) {
-			SignEnveloped sign = new SignEnveloped();
-			sign.testIt();
-		}
+//		
+//		public static void main(String[] args) {
+//			XMLSignEnveloped sign = new XMLSignEnveloped();
+//			sign.testIt();
+//		}
 
 }
