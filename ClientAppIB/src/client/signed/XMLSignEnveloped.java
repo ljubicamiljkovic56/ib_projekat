@@ -45,15 +45,16 @@ import org.xml.sax.SAXException;
 
 public class XMLSignEnveloped {
 
-		private static String file1 = "./data/data.xml";
-		private static String file2 = "./data/data_signed.xml";
-		private static String kljuc = "./data/slika.jks";
+//		private static String file1 = "./data/data.xml";
+//		private static String file2 = "./data/data_signed.xml";
+		private static String kljuc = "./temp/slika.jks";
 		
 		static {
 			  Security.addProvider(new BouncyCastleProvider());
 		      org.apache.xml.security.Init.init();
 		}
-		public void testIt() {
+		
+		public static void Sign(String file1, String file2) {
 			Document doc = loadDocument(file1);
 			
 			PrivateKey pk = readPrivateKey();
@@ -66,7 +67,7 @@ public class XMLSignEnveloped {
 			saveDocument(doc, file2);
 			System.out.println("Potpisivanje xml-a zavrseno");
 		}
-		private Document loadDocument(String file) {
+		private static Document loadDocument(String file) {
 			try {
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 				dbf.setNamespaceAware(true);
@@ -89,7 +90,7 @@ public class XMLSignEnveloped {
 			}
 		}
 		
-		private void saveDocument(Document doc, String fileName) {
+		private static void saveDocument(Document doc, String fileName) {
 			try {
 				File outFile = new File(fileName);
 				FileOutputStream f = new FileOutputStream(outFile);
@@ -121,7 +122,7 @@ public class XMLSignEnveloped {
 			}
 		}
 		
-		private Certificate readCertificate() {
+		private static Certificate readCertificate() {
 			try {
 
 				KeyStore ks = KeyStore.getInstance("JKS", "SUN");
@@ -158,7 +159,7 @@ public class XMLSignEnveloped {
 			} 
 		}
 		
-		private PrivateKey readPrivateKey() {
+		private static PrivateKey readPrivateKey() {
 			try {
 				KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 				
@@ -196,7 +197,7 @@ public class XMLSignEnveloped {
 			} 
 		}
 		
-		private Document signDocument(Document doc, PrivateKey privateKey, Certificate cert) {
+		private static Document signDocument(Document doc, PrivateKey privateKey, Certificate cert) {
 	      
 	      try {
 				Element rootEl = doc.getDocumentElement();

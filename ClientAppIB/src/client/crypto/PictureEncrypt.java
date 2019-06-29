@@ -53,21 +53,22 @@ import org.xml.sax.SAXException;
 import client.signed.CheckXMLSignEnveloped;
 import client.signed.XMLSignEnveloped;
 import client.util.HashAnImage;
+import client.util.ZipFolder;
 import client.util.ZipUtil;
 
 
 
 public class PictureEncrypt {
-	private static final String IN_FILE = "./data/picture.xml";
-	private static final String OUT_FILE = "./enc_data/picture_enc.xml";
-	private static final String KEY_STORE_FILE = "./data/slika.jks";
+//	private static final String IN_FILE = "./data/data_signed.xml";
+//	private static final String OUT_FILE = "./enc_data/data_signed_enc.xml";
+	private static final String KEY_STORE_FILE = "./temp/slika.jks";
 
 	static {
 		Security.addProvider(new BouncyCastleProvider());
 		org.apache.xml.security.Init.init();
 	}
 
-	public void testIt() {
+	public static void EncryptXML(String IN_FILE, String OUT_FILE) {
 		Document doc = loadDocument(IN_FILE);
 		
 		System.out.println("Generating secret key ....");
@@ -83,7 +84,7 @@ public class PictureEncrypt {
 		System.out.println("Encryption done");
 	}
 	
-	private Document loadDocument(String file) {
+	private static Document loadDocument(String file) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			dbf.setNamespaceAware(true);
@@ -106,7 +107,7 @@ public class PictureEncrypt {
 		}
 	}
 
-	private Certificate readCertificate() {
+	private static Certificate readCertificate() {
 		try {
 			KeyStore ks = KeyStore.getInstance("JKS", "SUN");
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
@@ -140,7 +141,7 @@ public class PictureEncrypt {
 	}
 
 
-	private void saveDocument(Document doc, String fileName) {
+	private static void saveDocument(Document doc, String fileName) {
 		try {
 			File outFile = new File(fileName);
 			FileOutputStream f = new FileOutputStream(outFile);
@@ -173,7 +174,7 @@ public class PictureEncrypt {
 	}
 
 
-	private SecretKey generateDataEncryptionKey() {
+	private static SecretKey generateDataEncryptionKey() {
 
 		try {
 			KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede"); 
@@ -187,7 +188,7 @@ public class PictureEncrypt {
 	}
 
 
-	private Document encrypt(Document doc, SecretKey key, Certificate certificate) {
+	private static Document encrypt(Document doc, SecretKey key, Certificate certificate) {
 
 		try {
 
@@ -232,26 +233,25 @@ public class PictureEncrypt {
 		}
 	}
 
-	public static void main(String[] args) throws MalformedURLException, IOException, NoSuchAlgorithmException {
-		PictureEncrypt encrypt = new PictureEncrypt();
-		encrypt.testIt();
-
-		PictureXML pictureXML = new PictureXML();
-		
-		pictureXML.getPictureXMLFiles("./data/slike");
-		
-		XMLSignEnveloped xmlSign = new XMLSignEnveloped();
-		xmlSign.testIt();
-		
-		CheckXMLSignEnveloped checkXmlSign = new CheckXMLSignEnveloped();
-		checkXmlSign.testIt();
-		
-		ZipUtil.zipFile("./enc_data/picture_enc.xml");
-		PictureUpload.uploadFile("./zip/picture_enc.xml.zip", "http://localhost:8080/upload");
-		
-		
-		
-		
-	}
+//	public static void main(String[] args) throws MalformedURLException, IOException, NoSuchAlgorithmException {
+//		PictureEncrypt encrypt = new PictureEncrypt();
+//		encrypt.testIt();
+//
+//		PictureXML.getPictureXMLFiles("./data/slike");
+//		
+//		XMLSignEnveloped xmlSign = new XMLSignEnveloped();
+//		xmlSign.testIt();
+//		
+//		CheckXMLSignEnveloped checkXmlSign = new CheckXMLSignEnveloped();
+//		checkXmlSign.testIt();
+//		
+//		ZipUtil.zipFile("./enc_data/data_signed_enc.xml");
+//		
+//		PictureUpload.uploadFile("./data_signed_enc.xml.zip", "http://localhost:8080/upload");
+//
+//		ZipFolder zf = new ZipFolder();
+//		zf.main(args);
+//		System.out.println("Zipovanje foldera..");
+//	}
 
 }

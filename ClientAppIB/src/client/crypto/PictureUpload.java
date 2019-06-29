@@ -40,9 +40,12 @@ public class PictureUpload {
 	        writer.flush();
 	        int statusCode = connection.getResponseCode();
 	        System.out.println("status code" + statusCode);
+	        System.out.println("Upload.....");
+	        System.out.println("Zavrsen upload");
 	    } catch (Exception ex){
 	        System.out.println("Ex: " + ex.getMessage());
-	        System.out.println("Upload.....");
+	        
+	        
 	        ex.printStackTrace();
 	    }
 	}

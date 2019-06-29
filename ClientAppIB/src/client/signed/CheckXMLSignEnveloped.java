@@ -26,21 +26,21 @@ import org.xml.sax.SAXException;
 
 public class CheckXMLSignEnveloped {
 	
-private static final String file2 = "./data/data_signed.xml";
+private static final String file2 = "./data/signed_data.xml";
 	
     static {
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
     }
 	
-	public void testIt() {
+	public static void testIt() {
 		Document doc = loadDocument(file2);
 		
 		boolean res = verifySignature(doc);
 		System.out.println("Provera = " + res);
 	}
 	
-	private Document loadDocument(String file) {
+	private static Document loadDocument(String file) {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			dbf.setNamespaceAware(true);
@@ -63,7 +63,7 @@ private static final String file2 = "./data/data_signed.xml";
 		}
 	}
 	
-	private boolean verifySignature(Document doc) {
+	private static boolean verifySignature(Document doc) {
 		
 		try { 
 			NodeList signatures = doc.getElementsByTagNameNS("http://www.w3.org/2000/09/xmldsig#", "Signature");
