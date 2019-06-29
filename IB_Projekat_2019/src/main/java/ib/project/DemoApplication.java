@@ -10,6 +10,8 @@ import ib.project.rest.DemoController;
 
 @SpringBootApplication
 public class DemoApplication {
+	
+	//proveraaaa
 
 	private static String DATA_DIR_PATH;
 	
