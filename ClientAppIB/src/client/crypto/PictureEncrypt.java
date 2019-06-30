@@ -59,8 +59,7 @@ import client.util.ZipUtil;
 
 
 public class PictureEncrypt {
-//	private static final String IN_FILE = "./data/data_signed.xml";
-//	private static final String OUT_FILE = "./enc_data/data_signed_enc.xml";
+
 	private static final String KEY_STORE_FILE = "./temp/slika.jks";
 
 	static {

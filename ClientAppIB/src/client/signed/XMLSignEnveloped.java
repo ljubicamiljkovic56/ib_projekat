@@ -45,8 +45,7 @@ import org.xml.sax.SAXException;
 
 public class XMLSignEnveloped {
 
-//		private static String file1 = "./data/data.xml";
-//		private static String file2 = "./data/data_signed.xml";
+
 		private static String kljuc = "./temp/slika.jks";
 		
 		static {
@@ -234,10 +233,6 @@ public class XMLSignEnveloped {
 				return null;
 			}
 		}
-//		
-//		public static void main(String[] args) {
-//			XMLSignEnveloped sign = new XMLSignEnveloped();
-//			sign.testIt();
-//		}
+
 
 }

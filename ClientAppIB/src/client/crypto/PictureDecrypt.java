@@ -39,8 +39,8 @@ import org.xml.sax.SAXException;
 
 public class PictureDecrypt {
 	
-	private static final String IN_FILE = "./data/picture.xml";
-	private static final String OUT_FILE = "./data/picture_dec.xml";
+	private static final String IN_FILE = "nesto";
+	private static final String OUT_FILE = "nesto";
 	private static final String KEY_STORE_FILE = "./data/slika.jks";
 	
 	
@@ -126,10 +126,10 @@ public class PictureDecrypt {
 			
 			
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
-			ks.load(in, "primer".toCharArray());
+			ks.load(in, "slika".toCharArray());
 			
-			if(ks.isKeyEntry("primer")) {
-				PrivateKey pk = (PrivateKey) ks.getKey("primer", "primer".toCharArray());
+			if(ks.isKeyEntry("slika")) {
+				PrivateKey pk = (PrivateKey) ks.getKey("slika", "slika".toCharArray());
 				return pk;
 			}
 			else

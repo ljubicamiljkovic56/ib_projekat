@@ -30,7 +30,7 @@ public class ZipFolder {
             for (String filePath : fileList) {
                 System.out.println("Compressing: " + filePath);
 
-                // Creates a zip entry.
+                
                 String name = filePath.substring(
                     directory.getAbsolutePath().length() + 1,
                     filePath.length());
@@ -38,7 +38,7 @@ public class ZipFolder {
                 ZipEntry zipEntry = new ZipEntry(name);
                 zos.putNextEntry(zipEntry);
 
-                // Read file content and write to zip output stream.
+                
                 try (FileInputStream fis = new FileInputStream(filePath)) {
                     byte[] buffer = new byte[1024];
                     int length;
@@ -46,7 +46,7 @@ public class ZipFolder {
                         zos.write(buffer, 0, length);
                     }
 
-                    // Close the zip entry.
+                   
                     zos.closeEntry();
                 } catch (Exception e) {
                     e.printStackTrace();

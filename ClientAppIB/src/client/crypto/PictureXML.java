@@ -33,7 +33,7 @@ import client.util.HashAnImage;
 
 public class PictureXML {
 
-//	 public static final String xmlFilePath = "/data/slike";
+
 	 private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
 	
@@ -59,15 +59,12 @@ public class PictureXML {
 			
 			for(File slika : slike) { 
 				System.out.println(slika);
-			//	String slikaString = slika.toString();
-			//	System.out.println(slikaString);
+			
 				img = ImageIO.read(new File(slika.getPath()));
-			//	int width = img.getWidth();
-			//	int height = img.getHeight();
+		
 				String checksum = HashAnImage.getFileChecksum(md5Digest, slika);
 				System.out.println(checksum);
-			//	System.out.println(width);
-			//	System.out.println(height);
+	
 				
 				DataBuffer dataBuffer = img.getData().getDataBuffer();
 				long sizeBytes = ((long) dataBuffer.getSize()) * 4l;
@@ -111,10 +108,7 @@ public class PictureXML {
 //              outFile.createNewFile();
 //              StreamResult streamResult = new StreamResult(outFile);
 //              transformer.transform(domSource, streamResult);
-              
-//	          System.out.println(putanja);
-//	          System.out.println(xmlFilePath);
-//	          System.out.println(transformer);
+
 	          System.out.println("Napravljen je xml fajl.");
 			
 		}catch (IOException ex) {

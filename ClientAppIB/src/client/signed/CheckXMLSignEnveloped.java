@@ -100,8 +100,5 @@ private static final String file2 = "./data/signed_data.xml";
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		CheckXMLSignEnveloped verify = new CheckXMLSignEnveloped();
-//		verify.testIt();
-//	}
+
 }
