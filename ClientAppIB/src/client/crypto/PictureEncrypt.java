@@ -211,7 +211,7 @@ public class PictureEncrypt {
 			
 			KeyInfo keyInfo = new KeyInfo(doc);
 			
-			keyInfo.addKeyName("Kriptovani tajni kljuc");
+			keyInfo.addKeyName("Kriptovani dokument");
 			
 			keyInfo.add(encryptedKey);
 			

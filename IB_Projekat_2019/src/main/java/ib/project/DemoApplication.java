@@ -5,13 +5,15 @@ import java.util.ResourceBundle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import ib.project.rest.DemoController;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"ib.project"})
 public class DemoApplication {
 	
-	//proveraaaa
+	
 
 	private static String DATA_DIR_PATH;
 	

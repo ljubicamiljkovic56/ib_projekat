@@ -27,7 +27,7 @@ public class User  implements UserDetails {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
 
@@ -45,13 +45,12 @@ public class User  implements UserDetails {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "last_password_reset_date")
-    private Timestamp lastPasswordResetDate;
+
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+           inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
     public Integer getId() {
@@ -67,8 +66,6 @@ public class User  implements UserDetails {
     }
 
     public void setPassword(String password) {
-        Timestamp now = new Timestamp(DateTime.now().getMillis());
-        this.setLastPasswordResetDate( now );
         this.password = password;
     }
 
@@ -106,14 +103,6 @@ public class User  implements UserDetails {
 
     public void setEnabled(boolean active) {
         this.active = active;
-    }
-
-    public Timestamp getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
-
-    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     @JsonIgnore
