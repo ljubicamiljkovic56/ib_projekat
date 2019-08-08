@@ -6,10 +6,14 @@ import java.util.ResourceBundle;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ib.project.rest.DemoController;
 
+@CrossOrigin
 @SpringBootApplication
+//@EnableJpaRepositories
 @ComponentScan(basePackages = {"ib.project"})
 public class DemoApplication {
 	
