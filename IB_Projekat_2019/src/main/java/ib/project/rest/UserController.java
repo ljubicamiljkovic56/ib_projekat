@@ -1,21 +1,20 @@
 package ib.project.rest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ib.project.misc.CopyFile;
 import ib.project.model.User;
-import ib.project.repository.UserRepository;
 import ib.project.service.UserService;
 
 @CrossOrigin
@@ -25,6 +24,12 @@ public class UserController {
 	
 	@Autowired
 	public UserService userService;	
+	
+	
+	@GetMapping(path="user/all")
+	public ArrayList<User> getAll(){
+		return userService.getAll();
+	}
 	
 	@PostMapping(path="user/register")
 	public ResponseEntity<User> dodajUsera( 

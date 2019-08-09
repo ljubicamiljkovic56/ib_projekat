@@ -1,7 +1,31 @@
-function accept(){
+$(document).ready(function() {
+	var usersTable = $('#usersTable');
+	
+	$.get("http://localhost:8080/api/users/user/all" +
+			"",
+			{
+			},
+		
+	function(response){
+		console.log(response);
+		console.log('ispis...')
+		
+		for(s of response) {
+			usersTable.append(
+				'<tr>' + 
+				'<td><a href="admin.html?id='+ s.id + '">' + s.id + '</a></td>' + 
+				'<td>' + s.username + '</td>' + '<td>' + s.password + '</td>' + 
+				'<td>' + s.certificate + '</td>' + '<td>'+ s.email + '</td>' + 
+				'<td>' + s.active + '</td>' + '<td>' + s.authority + '</td>' + 
+				'<td>' + '<form>' + '<input type="submit" onclick="accept()" value="Odobri" class="btn btn-primary" id="acceptSubmit">' + '</form>' + '</td>' + 
+				'</tr>'
+			)
+		}
+	}
+	);
+	
 	
 	function popuniTabelu() {
-		usersTable.find('tr:gt(1)').remove();
 
 		for(it of usersTable){
 			usersTable.append(
@@ -14,23 +38,20 @@ function accept(){
 			)
 		}
 	};
+});
+
+
+function accept() {
 	
-	
-	var usernameInput = $('#usernameInput');
-	var passwordInput = $('#passwordInput');
-	var emailInput = $('#emailInput');
-	
-	var username = usernameInput.val();
-	var password = passwordInput.val();
-	var email = emailInput.val();
 	
 	$.post("http://localhost:8080/api/users/user/accept",
 			
-	{
-		'username': username, 
-		'password': password,
-		'email': email
-	},
+			{
+		
+				'username': username
+		
+			},
+	
 	function(response){
 		console.log('odgovor');
 		console.log(response);

@@ -1,6 +1,8 @@
 package ib.project.service;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,10 @@ public class UserService {
     	u.setActive(true);
     	userRepository.save(u);
     	return u.getUsername();
+    }
+    
+    public ArrayList<User> getAll() {
+    	return  (ArrayList<User>) userRepository.findAll();
     }
 }
 
