@@ -30,6 +30,8 @@ public class User  implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "username")
+    private String username;
 
     @JsonIgnore
     @Column(name = "password")
@@ -44,14 +46,20 @@ public class User  implements UserDetails {
 
     @Column(name = "active")
     private boolean active;
+    
+    @Column(name = "authority")
+    private String authority;
 
-
+//
+//    @Column(name = "lastpasswordresetdate")
+//    private Timestamp lastPasswordResetDate;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-           inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
+    @JoinTable(name = "userauthority",
+    joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id"),
+           inverseJoinColumns = @JoinColumn(name = "authorityid", referencedColumnName = "id"))
+   // private List<Authority> authorities;
+
 
     public Integer getId() {
         return id;
@@ -66,7 +74,10 @@ public class User  implements UserDetails {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+    	Timestamp now = new Timestamp(DateTime.now().getMillis());
+    	//this.setLastPasswordResetDate( now );
+    	this.password = password;
+    	   
     }
 
 
@@ -79,20 +90,28 @@ public class User  implements UserDetails {
         this.certificate = certificate;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
+//    public void setAuthorities(List<Authority> authorities) {
+//        this.authorities = authorities;
+//    }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return this.authorities;
+//    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public void setEmail(String email) {
         this.email = email;
     }
 
@@ -123,11 +142,43 @@ public class User  implements UserDetails {
         return true;
     }
 
-	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+//
+//	@Override
+//	public String getUsername() {
+//		return null;
+//	}
+
+
+//	  public Timestamp getLastPasswordResetDate() {
+//	        return getLastPasswordResetDate();
+//	    }
+
 	public String getUsername() {
+		return username;
+	}
+//
+//		public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+//	        this.lastPasswordResetDate = lastPasswordResetDate;
+//	    }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }
