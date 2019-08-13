@@ -1,10 +1,15 @@
 $(document).ready(function() {
 	var usersTable = $('#usersTable');
 	
+	
+	
 	$.get("http://localhost:8080/api/users/user/all" +
 			"",
 			{
 			},
+			
+			
+			
 		
 	function(response){
 		console.log(response);
@@ -17,7 +22,7 @@ $(document).ready(function() {
 				'<td>' + s.username + '</td>' + '<td>' + s.password + '</td>' + 
 				'<td>' + s.certificate + '</td>' + '<td>'+ s.email + '</td>' + 
 				'<td>' + s.active + '</td>' + '<td>' + s.authority + '</td>' + 
-				'<td>' + '<form>' + '<input type="submit" onclick="accept()" value="Odobri" class="btn btn-primary" id="acceptSubmit">' + '</form>' + '</td>' + 
+				'<td>' + '<form>' + '<input type="submit" onclick="odobriUsera(\'' + s.username + '\')" value="Odobri" class="acceptSubmit" id="acceptSubmit">' + '</form>' + '</td>' + 
 				'</tr>'
 			)
 		}
@@ -38,10 +43,9 @@ $(document).ready(function() {
 			)
 		}
 	};
+	
 });
-
-
-function accept() {
+function odobriUsera(username) {
 	
 	
 	$.post("http://localhost:8080/api/users/user/accept",
@@ -59,3 +63,7 @@ function accept() {
 	);
 	
 }
+
+
+
+
