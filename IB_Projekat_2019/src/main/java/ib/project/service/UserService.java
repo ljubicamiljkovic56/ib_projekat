@@ -40,5 +40,22 @@ public class UserService {
     public ArrayList<User> getAll() {
     	return  (ArrayList<User>) userRepository.findAll();
     }
+    
+    public String proveriUsera(String username, String password) {
+    	User user2 = userRepository.findByUsername(username);
+    	if(user2 == null) {
+    		System.out.println("Nema korisnika sa tim usernamom");
+    	}else if (user2.getPassword().equals(password)){
+    		if(user2.getAuthority().equals("Regular")) {
+    			System.out.println("Ulogovali ste se kao regular");
+    		}else {
+    			System.out.println("Ulogovali ste se kao admin");
+    		}
+    	}else {
+    		System.out.println("Greska");
+    		
+    	}
+    	return user2.getAuthority();
+    }
 }
 

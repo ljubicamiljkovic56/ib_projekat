@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Registracija</title>
+<title>Login</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/register.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
 
@@ -17,15 +17,10 @@
             <label for="password">Password:</label>
             <input class="form-control" id="passwordInput" name="password" ng-model="credentials.password"/>
         </div>
-	<div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" class="form-control" id="emailInput" name="email" ng-model="credentials.email"/>
-        </div>
 	</form>
-	
 </div>
-<button type="submit" onclick= "register()" class="btn btn-primary" id="registerSubmit">Potvrdi</button>
+<button type="submit" onclick= "login()" class="btn btn-primary" id="loginSubmit">Uloguj se</button>
 
-<p><a href="login.html" id="logoutLink">Nazad na login</a></p>
+<p><a href="register.html" id="registerLink">Registracija</a></p>
 </body>
 </html>

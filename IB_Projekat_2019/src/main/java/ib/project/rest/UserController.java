@@ -68,4 +68,18 @@ public class UserController {
 		
 		return new ResponseEntity<User>(HttpStatus.CREATED);
 	}
+	
+	
+	@PostMapping(path="user/login")
+	public ResponseEntity<String> loginUsera(@RequestParam String username, @RequestParam String password) {
+		
+		System.out.println(username);
+		System.out.println(password);
+		
+		String userAuth = userService.proveriUsera(username, password);
+		
+		
+		
+		return new ResponseEntity<String>(userAuth, HttpStatus.CREATED);
+	}
 }
