@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ib.project.misc.CopyFile;
+import ib.project.misc.CopyFile2;
 import ib.project.model.User;
 import ib.project.service.UserService;
 
@@ -46,13 +47,29 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
+		try {
+			System.out.println("Zapocet proces");
+			Process p =Runtime.getRuntime().exec("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java -Dprotect=module -DignorePassphrase=true sun.security.tools.keytool.Main -genkeypair -validity 365 -alias " + user.getUsername() + " -keyalg RSA -sigalg SHA1withRSA -keystore " + user.getUsername() + ".jks -storetype JKS -storepass user12345 -keypass user12345 -dname \"CN=novi,OU=new,O=new,L=Novi Sad,ST=Serbia,C=rs\"");
+			System.out.println("Proces zavrsen");
+		} catch (IOException e) {
+			e.printStackTrace();
+	}
+		
+//		try {
+//			System.out.println("Sertifikat");
+//			Process p2 = Runtime.getRuntime().exec("java C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\keytool -export -alias " + user.getUsername() + " -file "+ user.getUsername() + ".cer -keystore" + user.getUsername() + ".jks -storepass user12345 > C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data | type C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data");
+//			System.out.println("Gotov sertifikat");
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		}
+		
 		user.setCertificate("./cert.data/" + user.getUsername() + ".cer");
 		user.setEmail(email);
 		user.setActive(false);
 		user.setAuthority("Regular");
 		userService.dodajUsera(user);
 		
-		
+
 	
 	return new ResponseEntity<User>(user,HttpStatus.CREATED);
 }
