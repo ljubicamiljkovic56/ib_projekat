@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ib.project.misc.CopyFile;
-import ib.project.misc.CopyFile2;
+import ib.project.misc.FileDownload;
 import ib.project.model.User;
 import ib.project.service.UserService;
 
@@ -49,8 +49,9 @@ public class UserController {
 		
 		try {
 			System.out.println("Zapocet proces");
-			Process p =Runtime.getRuntime().exec("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java -Dprotect=module -DignorePassphrase=true sun.security.tools.keytool.Main -genkeypair -validity 365 -alias " + user.getUsername() + " -keyalg RSA -sigalg SHA1withRSA -keystore " + user.getUsername() + ".jks -storetype JKS -storepass user12345 -keypass user12345 -dname \"CN=novi,OU=new,O=new,L=Novi Sad,ST=Serbia,C=rs\"");
+			Process p = Runtime.getRuntime().exec("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java -Dprotect=module -DignorePassphrase=true sun.security.tools.keytool.Main -genkeypair -validity 365 -alias " + user.getUsername() + " -keyalg RSA -sigalg SHA1withRSA -keystore " + user.getUsername() + ".jks -storetype JKS -storepass user12345 -keypass user12345 -dname \"CN=novi,OU=new,O=new,L=Novi Sad,ST=Serbia,C=rs\"");
 			System.out.println("Proces zavrsen");
+			System.out.println(p);
 		} catch (IOException e) {
 			e.printStackTrace();
 	}
@@ -98,5 +99,19 @@ public class UserController {
 		
 		
 		return new ResponseEntity<String>(userAuth, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(path="user/download")
+	public ResponseEntity<String> download(@RequestParam String username) {
+		
+		System.out.println("Download u toku");
+		String usersJks = userService.getByUsername(username);
+		String userCert = userService.getByUsername(username);
+		
+		FileDownload.downloadAFile("./" + usersJks + ".jks", "./download");
+		
+		FileDownload.downloadAFile("./cert.data" + userCert + ".cer", "./download");
+		
+		return new ResponseEntity<String>(usersJks, HttpStatus.CREATED);
 	}
 }

@@ -57,5 +57,10 @@ public class UserService {
     	}
     	return user2.getAuthority();
     }
+    
+    public String getByUsername(String username){
+    	User user3 = userRepository.findByUsername(username);
+    	return user3.getUsername() ;
+    }
 }
 

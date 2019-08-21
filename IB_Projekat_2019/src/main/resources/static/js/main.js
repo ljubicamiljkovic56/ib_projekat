@@ -1,7 +1,7 @@
 function download() {
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', "/api/demo/download", true);
+	xhr.open('GET', "/api/users/user/download", true);
 	xhr.responseType = 'blob';
 
 	xhr.onload = function(e) {
