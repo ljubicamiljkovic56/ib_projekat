@@ -1,20 +1,31 @@
 package ib.project.rest;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ib.project.beans.SessionController;
 import ib.project.misc.CopyFile;
-import ib.project.misc.FileDownload;
+//import ib.project.misc.FileDownload;
+//import ib.project.misc.FileDownload;
 import ib.project.model.User;
 import ib.project.service.UserService;
 
@@ -22,6 +33,10 @@ import ib.project.service.UserService;
 @RestController
 @RequestMapping(value="api/users")
 public class UserController {
+	
+	@Resource(name = "sessionScopedBean")
+	private SessionController sessionScopedBean;
+
 	
 	@Autowired
 	public UserService userService;	
@@ -100,18 +115,69 @@ public class UserController {
 		
 		return new ResponseEntity<String>(userAuth, HttpStatus.CREATED);
 	}
+
 	
-	@GetMapping(path="user/download")
-	public ResponseEntity<String> download(@RequestParam String username) {
+	@GetMapping(value="/get-cert", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+
+	public @ResponseBody byte[] getImageWithMediaType() throws IOException {
 		
-		System.out.println("Download u toku");
-		String usersJks = userService.getByUsername(username);
-		String userCert = userService.getByUsername(username);
 		
-		FileDownload.downloadAFile("./" + usersJks + ".jks", "./download");
+		String username = sessionScopedBean.getUsername();
 		
-		FileDownload.downloadAFile("./cert.data" + userCert + ".cer", "./download");
+		System.out.println(username);
 		
-		return new ResponseEntity<String>(usersJks, HttpStatus.CREATED);
+		String user = userService.getByUsername(username);
+		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data\\" + user + ".cer"));
+		return IOUtils.toByteArray(in);
 	}
+	
+	//get certificate
+	@GetMapping(value="/get-file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+
+	public @ResponseBody byte[] getCertificate(@RequestParam String username) throws IOException {
+		
+		System.out.println(username);
+		
+		String user = userService.getByUsername(username);
+		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\src\\main\\resources\\static\\" + user + ".jks"
+						+ ""));
+		OutputStream out = Files.newOutputStream(Paths.get("C:\\Users\\Ljubica\\Desktop" 
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\download\\" + user + ".cer"));
+		System.out.println(out);
+		return IOUtils.toByteArray(in);
+	}
+	
+	//get jks file
+	@GetMapping(value="/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+
+	public @ResponseBody byte[] getJKS(@RequestParam String username) throws IOException {
+		
+		System.out.println(username);
+		
+		String user = userService.getByUsername(username);
+		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\src\\main\\resources\\static\\" + user + ".jks"
+						+ ""));
+		OutputStream out = Files.newOutputStream(Paths.get("C:\\Users\\Ljubica\\Desktop" 
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\download\\" + user + ".jks"));
+		System.out.println(out);
+		return IOUtils.toByteArray(in);
+	}
+	
+	
+//	@GetMapping(path="user/download")
+//	public ResponseEntity<String> download(@RequestParam String username) {
+//		
+//		System.out.println("Download u toku");
+//		String usersJks = userService.getByUsername(username);
+//	//	String userCert = userService.getByUsername(username);
+//		
+//		FileDownload.downloadAFile("./" + usersJks + ".jks", "./download");
+//		
+//	//	FileDownload.downloadAFile("./cert.data" + userCert + ".cer", "./download");
+//		
+//		return new ResponseEntity<String>(usersJks, HttpStatus.CREATED);
+//	}
 }

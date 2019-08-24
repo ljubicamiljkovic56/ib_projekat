@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="js/regular.js"></script>
+<script type="text/javascript" src="js/regular2.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Regular users page</title>
 </head>
 <body>
 <p>Regular users page</p>
-
+	<form role="form">
+	<div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="usernameInput" name="username" ng-model="credentials.username"/>
+        </div>
+    </form>
 <p><a href="index.html" id=indexLink">Idi na download</a></p>
+<button type="button"  onclick="downloadcert()">Download certificate</button>
+<button type="button"  onclick="downloadjks()">Download jks file</button>
 <p><a href="login.html" id="loginLink">Nazad na login</a></p>
 </body>
 </html>
