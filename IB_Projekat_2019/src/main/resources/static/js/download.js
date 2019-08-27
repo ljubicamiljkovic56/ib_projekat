@@ -1,6 +1,8 @@
 function download() {
 	
-	$.get("http://localhost:8080/api/users/user/download", {
+	$.get("http://localhost:8080/api/users/user/prikaz_slika", {
+		
+		
 		
 	}
 	);

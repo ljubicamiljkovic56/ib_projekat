@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
+//import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ib.project.beans.SessionController;
+//import ib.project.beans.SessionController;
 import ib.project.misc.CopyFile;
+import ib.project.misc.PictureDecrypt;
+import ib.project.misc.UnzipFile;
 //import ib.project.misc.FileDownload;
 //import ib.project.misc.FileDownload;
 import ib.project.model.User;
@@ -34,8 +36,8 @@ import ib.project.service.UserService;
 @RequestMapping(value="api/users")
 public class UserController {
 	
-	@Resource(name = "sessionScopedBean")
-	private SessionController sessionScopedBean;
+//	@Resource(name = "sessionScopedBean")
+//	private SessionController sessionScopedBean;
 
 	
 	@Autowired
@@ -117,20 +119,20 @@ public class UserController {
 	}
 
 	
-	@GetMapping(value="/get-cert", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-
-	public @ResponseBody byte[] getImageWithMediaType() throws IOException {
-		
-		
-		String username = sessionScopedBean.getUsername();
-		
-		System.out.println(username);
-		
-		String user = userService.getByUsername(username);
-		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
-				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data\\" + user + ".cer"));
-		return IOUtils.toByteArray(in);
-	}
+//	@GetMapping(value="/get-cert", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+//
+//	public @ResponseBody byte[] getImageWithMediaType() throws IOException {
+//		
+//		
+//		String username = sessionScopedBean.getUsername();
+//		
+//		System.out.println(username);
+//		
+//		String user = userService.getByUsername(username);
+//		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
+//				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data\\" + user + ".cer"));
+//		return IOUtils.toByteArray(in);
+//	}
 	
 	//get certificate
 	@GetMapping(value="/get-file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -166,18 +168,33 @@ public class UserController {
 		return IOUtils.toByteArray(in);
 	}
 	
+	@GetMapping(value="/prikaz_slika") 
+	public @ResponseBody byte[] primer() {
+		
+		String zipFilePath = "/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/data.zip";
+        
+        String destDir = "/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped";
+        
+		
+		System.out.println("Unzip...");
+		UnzipFile.unzip(zipFilePath, destDir);
+		System.out.println("Unzipped");
+		
+		System.out.println("Decrypting");
+		PictureDecrypt decrypt = new PictureDecrypt();
+		decrypt.testIt();
+		System.out.println("Decrypted");
+		return null;
+		}
 	
-//	@GetMapping(path="user/download")
-//	public ResponseEntity<String> download(@RequestParam String username) {
-//		
-//		System.out.println("Download u toku");
-//		String usersJks = userService.getByUsername(username);
-//	//	String userCert = userService.getByUsername(username);
-//		
-//		FileDownload.downloadAFile("./" + usersJks + ".jks", "./download");
-//		
-//	//	FileDownload.downloadAFile("./cert.data" + userCert + ".cer", "./download");
-//		
-//		return new ResponseEntity<String>(usersJks, HttpStatus.CREATED);
-//	}
+	@GetMapping(value="pregled_slika")
+	public @ResponseBody byte[] primer3() {
+		
+		System.out.println("Prikazi slike na stranici");
+		
+		return null;
+	}
+	
+	
+	
 }
