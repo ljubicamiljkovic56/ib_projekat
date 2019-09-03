@@ -18,6 +18,7 @@ function register(){
 	function(response){
 		console.log('odgovor');
 		console.log(response);
+		alert('Uspesno ste se registrovali.')
 	}
 	);
 }

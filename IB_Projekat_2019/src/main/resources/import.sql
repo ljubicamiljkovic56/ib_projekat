@@ -14,7 +14,7 @@ CREATE TABLE users(
 );
 
 INSERT INTO USERS (id, username, password, certificate, email, active, authority) VALUES (1, 'user1','user1', 'cer1', 'user1@example.com', 0, 'Regular');
-INSERT INTO USERS (id, username, password, certificate, email, active, authority) VALUES (2, 'user2','user2', 'cer2', 'user2@example.com', 0, 'Admin');
+INSERT INTO USERS (id, username, password, certificate, email, active, authority) VALUES (2, 'user2','user2', 'cer2', 'user2@example.com', 1, 'Admin');
 
 CREATE TABLE userauthority(
 	id INT AUTO_INCREMENT,

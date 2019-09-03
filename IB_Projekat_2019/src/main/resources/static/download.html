@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+<title>Download</title>
+<meta charset="UTF-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Slike koje mozete downloadovati</h1>
+	
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/cherry blossoms.jpg" download>Slika 1</a>
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/cool-diamond.jpg" download>Slika 2</a>
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/floral.jpg" download>Slika 3</a>
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/kokkari beach.jpg" download>Slika 4</a>
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/oasis.jpg" download>Slika 5</a>
+	<a href="/Users/Ljubica/Desktop/ib_projekat/ib_projekat/IB_Projekat_2019/uploads/unzipped/slike/Springtime.jpg" download>Slika 6</a>
+	
+	
+	<button onclick="download()">Download</button>
+
+	
+
+	<script>
+	function download(){
+		console.log("da li si usao u funkciju?");
+				
+		var jqxhr = $.get("http://localhost:8080/api/users/user/pregled_slika", function() {
+			alert('success').fail(function(){
+				alert('eeee');
+			})
+		})
+			.done(function(){
+			alert('second success');
+		})
+			.fail(function(){
+			alert('error');	
+		})
+			.always(function(){
+			alert('finished');	
+		})
+		
+		jqxhr.always(function(){
+			alert('second finished')
+		});
+		
+		console.log("zavrsena funkcija?");
+		}
+	</script>
+</body>
+</html>

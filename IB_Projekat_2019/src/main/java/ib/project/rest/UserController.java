@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
+
 //import ib.project.beans.SessionController;
 import ib.project.misc.CopyFile;
 import ib.project.misc.PictureDecrypt;
@@ -143,7 +145,7 @@ public class UserController {
 		
 		String user = userService.getByUsername(username);
 		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
-				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\src\\main\\resources\\static\\" + user + ".jks"
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data\\" + user + ".cer"
 						+ ""));
 		OutputStream out = Files.newOutputStream(Paths.get("C:\\Users\\Ljubica\\Desktop" 
 				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\download\\" + user + ".cer"));
@@ -160,7 +162,7 @@ public class UserController {
 		
 		String user = userService.getByUsername(username);
 		InputStream in = Files.newInputStream(Paths.get("C:\\Users\\Ljubica\\Desktop"
-				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\src\\main\\resources\\static\\" + user + ".jks"
+				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\" + user + ".jks"
 						+ ""));
 		OutputStream out = Files.newOutputStream(Paths.get("C:\\Users\\Ljubica\\Desktop" 
 				+ "\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\download\\" + user + ".jks"));
@@ -187,12 +189,17 @@ public class UserController {
 		return null;
 		}
 	
+	@CrossOrigin
 	@GetMapping(value="pregled_slika")
-	public @ResponseBody byte[] primer3() {
+	public @ResponseBody String primer3() {
 		
 		System.out.println("Prikazi slike na stranici");
 		
-		return null;
+		String sadrzaj = "[\"uploads/unzipped/slike/cherry blossoms.jpg\", \"/uploads/unzipped/slike/cool-diamond.jpg\","
+				+ "\"/uploads/unzipped/slike/floral.jpg\", \"/uploads/unzipped/slike/kokkari beach.jpg\",  \"/uploads/unzipped/slike/oasis.jpg\", \"uploads/unzipped/slike/Springtime.jpg\"]";
+	
+		
+		return sadrzaj;
 	}
 	
 	

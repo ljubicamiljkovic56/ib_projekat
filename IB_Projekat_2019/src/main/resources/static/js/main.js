@@ -21,10 +21,10 @@ function download() {
 	xhr.send();
 };
 
-window.onload = function() {
-	var link_za_cert = document.createElement('a');
-	link_za_cert.setAttribute('href', window.location.href + 'api/users/get-cert');
-	link_za_cert.innerText = 'Download certificates';
-	
-	document.body.appendChild(link_za_cert);
+//window.onload = function() {
+//	var link_za_cert = document.createElement('a');
+//	link_za_cert.setAttribute('href', window.location.href + 'api/users/get-cert');
+//	link_za_cert.innerText = 'Download certificates';
+//	
+//	document.body.appendChild(link_za_cert);
 };
