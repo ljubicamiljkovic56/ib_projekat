@@ -57,41 +57,48 @@ public class UserController {
 	
 		System.out.println(username + "-" + password);
 		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		
-		try {
-			CopyFile.copyFile("./certificate/user.cer", "./cert.data/" + user.getUsername() + ".cer");
-		} catch (IOException e) {
-			e.printStackTrace();
+		boolean provera = userService.proveriUsername(username);
+		if(provera == true) {
+			System.out.println("Mozete se registrovati");
+			user.setUsername(username);
+			user.setPassword(password);
+			
+			try {
+				CopyFile.copyFile("./certificate/user.cer", "./cert.data/" + user.getUsername() + ".cer");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				System.out.println("Zapocet proces");
+				Process p = Runtime.getRuntime().exec("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java -Dprotect=module -DignorePassphrase=true sun.security.tools.keytool.Main -genkeypair -validity 365 -alias " + user.getUsername() + " -keyalg RSA -sigalg SHA1withRSA -keystore " + user.getUsername() + ".jks -storetype JKS -storepass user12345 -keypass user12345 -dname \"CN=novi,OU=new,O=new,L=Novi Sad,ST=Serbia,C=rs\"");
+				System.out.println("Proces zavrsen");
+				System.out.println(p);
+			} catch (IOException e) {
+				e.printStackTrace();
 		}
-		
-		try {
-			System.out.println("Zapocet proces");
-			Process p = Runtime.getRuntime().exec("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java -Dprotect=module -DignorePassphrase=true sun.security.tools.keytool.Main -genkeypair -validity 365 -alias " + user.getUsername() + " -keyalg RSA -sigalg SHA1withRSA -keystore " + user.getUsername() + ".jks -storetype JKS -storepass user12345 -keypass user12345 -dname \"CN=novi,OU=new,O=new,L=Novi Sad,ST=Serbia,C=rs\"");
-			System.out.println("Proces zavrsen");
-			System.out.println(p);
-		} catch (IOException e) {
-			e.printStackTrace();
-	}
-		
-//		try {
-//			System.out.println("Sertifikat");
-//			Process p2 = Runtime.getRuntime().exec("java C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\keytool -export -alias " + user.getUsername() + " -file "+ user.getUsername() + ".cer -keystore" + user.getUsername() + ".jks -storepass user12345 > C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data | type C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data");
-//			System.out.println("Gotov sertifikat");
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		}
-		
-		user.setCertificate("./cert.data/" + user.getUsername() + ".cer");
-		user.setEmail(email);
-		user.setActive(false);
-		user.setAuthority("Regular");
-		userService.dodajUsera(user);
-		
+			
+//			try {
+//				System.out.println("Sertifikat");
+//				Process p2 = Runtime.getRuntime().exec("java C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\keytool -export -alias " + user.getUsername() + " -file "+ user.getUsername() + ".cer -keystore" + user.getUsername() + ".jks -storepass user12345 > C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data | type C:\\Users\\Ljubica\\Desktop\\ib_projekat\\ib_projekat\\IB_Projekat_2019\\cert.data");
+//				System.out.println("Gotov sertifikat");
+//			} catch (IOException ex) {
+//				ex.printStackTrace();
+//			}
+			
+			user.setCertificate("./cert.data/" + user.getUsername() + ".cer");
+			user.setEmail(email);
+			user.setActive(false);
+			user.setAuthority("Regular");
+			userService.dodajUsera(user);
+			
+			return new ResponseEntity<User>(user,HttpStatus.CREATED);
+			
+		}else  {
+			System.out.println("Username vec postoji i ne mozete da se sa njim registrujete");
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
 
-	
-	return new ResponseEntity<User>(user,HttpStatus.CREATED);
 }
 	@PostMapping(path="user/accept")
 	public ResponseEntity<User> odobriUsera(@RequestParam String username){
@@ -189,6 +196,7 @@ public class UserController {
 		return null;
 		}
 	
+	//pokusaj dynamic
 	@CrossOrigin
 	@GetMapping(value="pregled_slika")
 	public @ResponseBody String primer3() {

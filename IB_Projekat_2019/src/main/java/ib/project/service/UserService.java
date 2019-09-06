@@ -62,5 +62,14 @@ public class UserService {
     	User user3 = userRepository.findByUsername(username);
     	return user3.getUsername() ;
     }
+    
+    public boolean proveriUsername(String username) {
+    	User user3 = userRepository.findByUsername(username);
+    	if(user3 == null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
 }
 

@@ -27,4 +27,4 @@ function download() {
 //	link_za_cert.innerText = 'Download certificates';
 //	
 //	document.body.appendChild(link_za_cert);
-};
+//};
